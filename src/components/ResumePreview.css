@@ -1,0 +1,37 @@
+.resume-container {
+  display: flex;
+  padding: 20px;
+}
+
+.left-column, .right-column {
+  padding: 20px;
+}
+
+.left-column {
+  flex: 30%;
+  border-right: 1px solid #ccc;
+  background-color: #4c839a;
+}
+
+.right-column {
+  flex: 70%;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.right-column h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.right-column h2 {
+  margin-top: 10px;
+  font-size: 20px;
+}

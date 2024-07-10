@@ -1,0 +1,29 @@
+
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+form {
+  margin: 20px auto;
+  width: 300px;
+  text-align: left;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4c839a;;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4c839a;
+}
