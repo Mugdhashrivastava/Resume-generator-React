@@ -10,18 +10,19 @@
 .left-column {
   flex: 30%;
   border-right: 1px solid #ccc;
-  background-color: #4c839a;
+  background-color: #aacbda;
+  padding: 2rem;
 }
 
 .right-column {
   flex: 70%;
+  padding: 2rem;
 }
 
 .profile-picture {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 50%;
   margin-bottom: 20px;
 }
 

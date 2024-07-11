@@ -1,7 +1,6 @@
 
 .App {
   font-family: Arial, sans-serif;
-  text-align: center;
 }
 
 form {
@@ -15,15 +14,15 @@ form div {
 }
 
 button {
-  display: block;
+  display: block; 
   width: 100%;
   padding: 10px;
-  background-color: #4c839a;;
+  background-color: #14658b;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #4c839a;
+  background-color: #aacbda;
 }

@@ -1,8 +1,9 @@
 Pre- requisite : Node.js
-Creating react app : npx create-react-app resume-generator
-cd resume-generator
-
-Running the project : npm start
+Creating react app : ```npx create-react-app builder2```
+Set current directory :```cd builder2```
 
 
-Libraties install:npm install react-to-print
+Running the project : ```npm start``` or ```npm run start```
+
+
+Libraties install: ```npm install react-to-print```

@@ -7,16 +7,19 @@ const ResumePreview = forwardRef(({ data }, ref) => {
     <div className="resume-container" ref={ref}>
       <div className="left-column">
         {data.picture && <img src={data.picture} alt="User" className="profile-picture" />}
-        <p><strong>Title:</strong> {data.title}</p>
-        <p><strong>Email:</strong> {data.email}</p>
-        <p><strong>Phone:</strong> {data.phone}</p>
+        <p> {data.title}</p>
+        <p><strong>{data.yoe} years of experience </strong></p>
+        <h1><strong>CONTACT</strong> </h1>
         <p><strong>Location:</strong> {data.location}</p>
-        <p><strong>Summary:</strong> {data.summary}</p>
+        <p><strong>Email:</strong> {data.email}</p>
+        <h1><strong>SUMMARY</strong></h1>
+        <p> {data.summary}</p>
         <p><strong>Skills:</strong> {data.skills}</p>
       </div>
       <div className="right-column">
         <h1>{data.name}</h1>
-        <h2>{data.title}</h2>
+        <p>{data.currentEmployer}</p>
+        <p>{data.title}</p>
         <p><strong>Experience:</strong> {data.experience}</p>
         <p><strong>Education:</strong> {data.education}</p>
       </div>
