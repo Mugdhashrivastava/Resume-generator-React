@@ -9,12 +9,23 @@ const ResumeForm = ({ onSave }) => {
     email: '',
     location: '',
     summary: '',
-    skills: '',
-    experience: '',
+    skills: [''],
+
+  
     education: '',
     picture: '',
     currentEmployer: '',
     yoe: '',
+
+    experience: [
+      {
+        startDate: '',
+        endDate: '',
+        companyName: '',
+        projects: ''
+      }
+    ]
+    
   });
 
   const navigate = useNavigate();
@@ -32,6 +43,26 @@ const ResumeForm = ({ onSave }) => {
     onSave(data);
     navigate('/preview');
   };
+
+  const handleExperienceChange = (index, e) => {
+  const { name, value } = e.target;
+  const newExperience = [...data.experience];
+  newExperience[index][name] = value;
+  setData({
+    ...data,
+    experience: newExperience,
+  });
+};
+
+const addExperienceSection = () => {
+  setData({
+    ...data,
+    experience: [...data.experience, { startDate: '', endDate: '', companyName: '', projects: '' }]
+  });
+};
+
+
+
 
   return (
     <form onSubmit={handleSubmit} className="resume-form">
@@ -68,13 +99,32 @@ const ResumeForm = ({ onSave }) => {
         <textarea name="skills" id="skills" placeholder="Skills" value={data.skills} onChange={handleChange}></textarea>
       </div>
       <div className="form-group">
-        <label htmlFor="currentEmployer">Current Employer</label>
+        <label htmlFor="currentEmployer">Current Company</label>
         <input type="text" name="currentEmployer" id="currentEmployer" placeholder="Current Company" value={data.currentEmployer} onChange={handleChange} />
       </div>
-      <div className="form-group">
-        <label htmlFor="experience">Experience</label>
-        <textarea name="experience" id="experience" placeholder="Experience" value={data.experience} onChange={handleChange}></textarea>
-      </div>
+     
+<div className="experience-section">
+  <h2>Experience</h2>
+  {data.experience.map((exp, index) => (
+    <div key={index} className="form-group">
+      <label htmlFor={`startDate-${index}`}>Start Date</label>
+      <input type="date" name="startDate" id={`startDate-${index}`} value={exp.startDate} onChange={(e) => handleExperienceChange(index, e)} />
+      <label htmlFor={`endDate-${index}`}>End Date</label>
+      <input type="date" name="endDate" id={`endDate-${index}`} value={exp.endDate} onChange={(e) => handleExperienceChange(index, e)} />
+      <label htmlFor={`companyName-${index}`}>Company Name</label>
+      <input type="text" name="companyName" id={`companyName-${index}`} placeholder="Company Name" value={exp.companyName} onChange={(e) => handleExperienceChange(index, e)} />
+      <label htmlFor={`projects-${index}`}>Projects</label>
+      <textarea name="projects" id={`projects-${index}`} placeholder="Projects" value={exp.projects} onChange={(e) => handleExperienceChange(index, e)}></textarea>
+    </div>
+  ))}
+  <button type="button" onClick={addExperienceSection}>Add Experience</button>
+</div>
+
+
+
+
+
+
       <div className="form-group">
         <label htmlFor="education">Education</label>
         <textarea name="education" id="education" placeholder="Education" value={data.education} onChange={handleChange}></textarea>
@@ -85,3 +135,5 @@ const ResumeForm = ({ onSave }) => {
 };
 
 export default ResumeForm;
+
+
