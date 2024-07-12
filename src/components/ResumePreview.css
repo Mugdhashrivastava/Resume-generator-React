@@ -1,38 +1,55 @@
+
 .resume-container {
   display: flex;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
 }
 
 .left-column, .right-column {
+
   padding: 20px;
+  box-sizing: border-box;
+  
 }
 
 .left-column {
-  flex: 30%;
   border-right: 1px solid #ccc;
-  background-color: #aacbda;
-  padding: 2rem;
-}
-
-.right-column {
-  flex: 70%;
-  padding: 2rem;
 }
 
 .profile-picture {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   margin-bottom: 20px;
 }
 
-.right-column h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
+.info-section {
+  margin-bottom: 20px;
 }
 
-.right-column h2 {
-  margin-top: 10px;
-  font-size: 20px;
+.section-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-top: 1px solid #ccc;
+  padding-top: 0.5rem;
+  
+}
+
+.name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.title, .yoe, .current-employer {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 5px 0;
 }
