@@ -21,7 +21,7 @@ const ResumeForm = ({ onSave }) => {
         startDate: "",
         endDate: "",
         companyName: "",
-        projects: "",
+         projects: ''
       },
     ],
   });

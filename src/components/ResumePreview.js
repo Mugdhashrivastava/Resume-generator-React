@@ -13,14 +13,16 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <p className="yoe">
             <strong>{data.yoe} years of experience</strong>
           </p>
-          <h2 className="section-header">Contact</h2>
+          <h2 className="section-header">CONTACT</h2> 
           <p>
-            <strong>Location:</strong> {data.location}
+            {/* <strong>Location:</strong>  */}
+            {data.location}
           </p>
           <p>
-            <strong>Email:</strong> {data.email}
+            {/* <strong>Email:</strong>  */}
+            {data.email}
           </p>
-          <h2 className="section-header">Summary</h2>
+          <h2 className="section-header">SUMMARY</h2>
           <p>{data.summary}</p>
          
           <h2 className="section-header">Skills</h2>
@@ -36,7 +38,7 @@ const ResumePreview = forwardRef(({ data }, ref) => {
         <p className="current-employer">{data.currentEmployer}</p>
         <p className="title">{data.title}</p>
 
-        <h2 className="section-header">Experience</h2>
+        <h2 className="blue-header">Experience</h2>
         {data.experience.map((exp, index) => (
           <div key={index} className="experience-section">
             <p>
@@ -54,7 +56,7 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           </div>
         ))}
 
-        <h2 className="section-header">Education</h2>
+        <h2 className="blue-header">Education</h2>
         <p>{data.education}</p>
       </div>
     </div>
