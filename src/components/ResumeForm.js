@@ -19,13 +19,10 @@ const ResumeForm = ({ onSave }) => {
         startDate: "",
         endDate: "",
         companyName: "",
-        projects: '',
+        projects: "",
       },
     ],
   });
-
-  const [isSkillsCollapsed, setIsSkillsCollapsed] = useState(false);
-  const [isExperienceCollapsed, setIsExperienceCollapsed] = useState(false);
 
   const navigate = useNavigate();
 
@@ -80,6 +77,9 @@ const ResumeForm = ({ onSave }) => {
     });
   };
 
+  const [isSkillsCollapsed, setIsSkillsCollapsed] = useState(false);
+  const [isExperienceCollapsed, setIsExperienceCollapsed] = useState(false);
+
   const toggleSkills = () => {
     setIsSkillsCollapsed(!isSkillsCollapsed);
   };
@@ -90,36 +90,82 @@ const ResumeForm = ({ onSave }) => {
 
   return (
     <form onSubmit={handleSubmit} className="resume-form">
-      <div className="form-group">
-        <label htmlFor="picture">Profile Picture</label>
-        <input type="file" name="picture" id="picture" onChange={handleChange} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="name">Full Name</label>
-        <input type="text" name="name" id="name" placeholder="Name" value={data.name} onChange={handleChange} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="title">Job Title</label>
-        <input type="text" name="title" id="title" placeholder="Title" value={data.title} onChange={handleChange} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="yoe">Years of Experience</label>
-        <input type="number" name="yoe" id="yoe" placeholder="Years of experience" value={data.yoe} onChange={handleChange} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Email" value={data.email} onChange={handleChange} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="location">Location</label>
-        <input type="text" name="location" id="location" placeholder="Location" value={data.location} onChange={handleChange} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="summary">Summary</label>
-        <textarea name="summary" id="summary" placeholder="Summary" value={data.summary} onChange={handleChange}></textarea>
+      {/* Personal Information Section */}
+      <div className="form-section">
+        <h2>Personal Information</h2>
+        <div className="form-group">
+          <label htmlFor="picture">Profile Picture</label>
+          <input
+            type="file"
+            name="picture"
+            id="picture"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="name">Full Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            value={data.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="title">Job Title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Title"
+            value={data.title}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="yoe">Years of Experience</label>
+          <input
+            type="number"
+            name="yoe"
+            id="yoe"
+            placeholder="Years of experience"
+            value={data.yoe}
+            onChange={handleChange}
+          />
+        </div>
       </div>
 
-      <div className="collapsible-section">
+      {/* Contact Information Section */}
+      <div className="form-section">
+        <h2>Contact Information</h2>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            value={data.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="location">Location</label>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Location"
+            value={data.location}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      {/* Skills Section */}
+      <div className="form-section collapsible-section">
         <h2 onClick={toggleSkills} className="collapsible-header">
           Skills {isSkillsCollapsed ? "▲" : "▼"}
         </h2>
@@ -127,7 +173,13 @@ const ResumeForm = ({ onSave }) => {
           <div className="skills-section">
             {data.skills.map((skill, index) => (
               <div key={index} className="form-group">
-                <input type="text" name={`skill-${index}`} placeholder="Skill" value={skill} onChange={(e) => handleSkillChange(index, e)} />
+                <input
+                  type="text"
+                  name={`skill-${index}`}
+                  placeholder="Skill"
+                  value={skill}
+                  onChange={(e) => handleSkillChange(index, e)}
+                />
               </div>
             ))}
             <button type="button" onClick={addSkill}>
@@ -137,12 +189,8 @@ const ResumeForm = ({ onSave }) => {
         )}
       </div>
 
-      <div className="form-group">
-        <label htmlFor="currentEmployer">Current Company</label>
-        <input type="text" name="currentEmployer" id="currentEmployer" placeholder="Current Company" value={data.currentEmployer} onChange={handleChange} />
-      </div>
-
-      <div className="collapsible-section">
+      {/* Experience Section */}
+      <div className="form-section collapsible-section">
         <h2 onClick={toggleExperience} className="collapsible-header">
           Experience {isExperienceCollapsed ? "▲" : "▼"}
         </h2>
@@ -151,13 +199,38 @@ const ResumeForm = ({ onSave }) => {
             {data.experience.map((exp, index) => (
               <div key={index} className="form-group">
                 <label htmlFor={`startDate-${index}`}>Start Date</label>
-                <input type="date" name="startDate" id={`startDate-${index}`} value={exp.startDate} onChange={(e) => handleExperienceChange(index, e)} />
+                <input
+                  type="date"
+                  name="startDate"
+                  id={`startDate-${index}`}
+                  value={exp.startDate}
+                  onChange={(e) => handleExperienceChange(index, e)}
+                />
                 <label htmlFor={`endDate-${index}`}>End Date</label>
-                <input type="date" name="endDate" id={`endDate-${index}`} value={exp.endDate} onChange={(e) => handleExperienceChange(index, e)} />
+                <input
+                  type="date"
+                  name="endDate"
+                  id={`endDate-${index}`}
+                  value={exp.endDate}
+                  onChange={(e) => handleExperienceChange(index, e)}
+                />
                 <label htmlFor={`companyName-${index}`}>Company Name</label>
-                <input type="text" name="companyName" id={`companyName-${index}`} placeholder="Company Name" value={exp.companyName} onChange={(e) => handleExperienceChange(index, e)} />
+                <input
+                  type="text"
+                  name="companyName"
+                  id={`companyName-${index}`}
+                  placeholder="Company Name"
+                  value={exp.companyName}
+                  onChange={(e) => handleExperienceChange(index, e)}
+                />
                 <label htmlFor={`projects-${index}`}>Projects</label>
-                <textarea name="projects" id={`projects-${index}`} placeholder="Projects" value={exp.projects} onChange={(e) => handleExperienceChange(index, e)}></textarea>
+                <textarea
+                  name="projects"
+                  id={`projects-${index}`}
+                  placeholder="Projects"
+                  value={exp.projects}
+                  onChange={(e) => handleExperienceChange(index, e)}
+                ></textarea>
               </div>
             ))}
             <button type="button" onClick={addExperienceSection}>
@@ -167,9 +240,19 @@ const ResumeForm = ({ onSave }) => {
         )}
       </div>
 
-      <div className="form-group">
-        <label htmlFor="education">Education</label>
-        <textarea name="education" id="education" placeholder="Education" value={data.education} onChange={handleChange}></textarea>
+      {/* Education Section */}
+      <div className="form-section">
+        <h2>Education</h2>
+        <div className="form-group">
+          <label htmlFor="education">Education</label>
+          <textarea
+            name="education"
+            id="education"
+            placeholder="Education"
+            value={data.education}
+            onChange={handleChange}
+          ></textarea>
+        </div>
       </div>
       <button type="submit">Save</button>
     </form>
