@@ -16,7 +16,9 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <h2 className="section-header">CONTACT</h2> 
           <p>
             {/* <strong>Location:</strong>  */}
-            {data.location}
+            
+           {data.city}, {data.country}
+        
           </p>
           <p>
             {/* <strong>Email:</strong>  */}

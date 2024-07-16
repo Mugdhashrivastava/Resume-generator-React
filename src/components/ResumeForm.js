@@ -210,6 +210,15 @@ const ResumeForm = ({ onSave }) => {
           <div className="experience-section">
             {data.experience.map((exp, index) => (
               <div key={index} className="form-group">
+                <label htmlFor={`companyName-${index}`}>Company Name</label>
+                <input
+                  type="text"
+                  name="companyName"
+                  id={`companyName-${index}`}
+                  placeholder="Company Name"
+                  value={exp.companyName}
+                  onChange={(e) => handleExperienceChange(index, e)}
+                />
                 <label htmlFor={`startDate-${index}`}>Start Date</label>
                 <input
                   type="date"
@@ -226,15 +235,7 @@ const ResumeForm = ({ onSave }) => {
                   value={exp.endDate}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
-                <label htmlFor={`companyName-${index}`}>Company Name</label>
-                <input
-                  type="text"
-                  name="companyName"
-                  id={`companyName-${index}`}
-                  placeholder="Company Name"
-                  value={exp.companyName}
-                  onChange={(e) => handleExperienceChange(index, e)}
-                />
+
                 <label htmlFor={`projects-${index}`}>Projects</label>
                 <textarea
                   name="projects"
