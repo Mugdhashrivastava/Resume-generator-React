@@ -34,7 +34,7 @@ const ResumePreview = forwardRef(({ data }, ref) => {
         </div>
       </div>
       <div className="right-column">
-        <h1 className="name">{data.name}</h1>
+        <h1 className="name">{data.firstName} {data.lastName}</h1>
         <p className="current-employer">{data.currentEmployer}</p>
         <p className="title">{data.title}</p>
 

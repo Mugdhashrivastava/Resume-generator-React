@@ -4,7 +4,8 @@ import "./ResumeForm.css";
 
 const ResumeForm = ({ onSave }) => {
   const [data, setData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     title: "",
     email: "",
     location: "",
@@ -103,18 +104,29 @@ const ResumeForm = ({ onSave }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="name">Full Name</label>
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
-            name="name"
-            id="name"
-            placeholder="Name"
-            value={data.name}
+            name="firstName"
+            id="firstName"
+            placeholder="First Name"
+            value={data.firstName}
             onChange={handleChange}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="title">Job Title</label>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            placeholder="Last Name"
+            value={data.lastName}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
           <input
             type="text"
             name="title"
