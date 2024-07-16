@@ -8,7 +8,8 @@ const ResumeForm = ({ onSave }) => {
     lastName: "",
     title: "",
     email: "",
-    location: "",
+    city: "",
+    country: "",
     summary: "",
     skills: [""],
     education: "",
@@ -164,13 +165,24 @@ const ResumeForm = ({ onSave }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="location">Location</label>
+          <label htmlFor="city">City</label>
           <input
             type="text"
-            name="location"
-            id="location"
-            placeholder="Location"
-            value={data.location}
+            name="city"
+            id="city"
+            placeholder="City"
+            value={data.city}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="country">Country</label>
+          <input
+            type="text"
+            name="country"
+            id="country"
+            placeholder="Country"
+            value={data.country}
             onChange={handleChange}
           />
         </div>

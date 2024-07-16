@@ -13,20 +13,21 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <p className="yoe">
             <strong>{data.yoe} years of experience</strong>
           </p>
-          <h2 className="section-header">CONTACT</h2> 
+          <h2 className="section-header">CONTACT</h2>
           <p>
-            {/* <strong>Location:</strong>  */}
-            
-           {data.city}, {data.country}
-        
+            <strong>City:</strong> {data.city}
           </p>
           <p>
-            {/* <strong>Email:</strong>  */}
+            <strong>Country:</strong> {data.country}
+          </p>
+
+          <p>
+            <strong>Email:</strong> 
             {data.email}
           </p>
           <h2 className="section-header">SUMMARY</h2>
           <p>{data.summary}</p>
-         
+
           <h2 className="section-header">Skills</h2>
           <ul>
             {data.skills.map((skill, index) => (
@@ -36,7 +37,9 @@ const ResumePreview = forwardRef(({ data }, ref) => {
         </div>
       </div>
       <div className="right-column">
-        <h1 className="name">{data.firstName} {data.lastName}</h1>
+        <h1 className="name">
+          {data.firstName} {data.lastName}
+        </h1>
         <p className="current-employer">{data.currentEmployer}</p>
         <p className="title">{data.title}</p>
 
