@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ResumeForm.css";
+import dropdownOptions from '../dropdownOptions.json'; // Import dropdown options from JSON file
 
 const ResumeForm = ({ onSave }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
-    title: "",
+    title: "", 
     email: "",
     city: "",
     country: "",
@@ -90,6 +91,13 @@ const ResumeForm = ({ onSave }) => {
     setIsExperienceCollapsed(!isExperienceCollapsed);
   };
 
+  // Fetch job titles from JSON file (optional if not importing directly)
+  const [jobTitles, setJobTitles] = useState([]);
+
+  useEffect(() => {
+    setJobTitles(dropdownOptions.jobTitles);
+  }, []);
+
   return (
     <form onSubmit={handleSubmit} className="resume-form">
       {/* Personal Information Section */}
@@ -127,15 +135,20 @@ const ResumeForm = ({ onSave }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
+          <label htmlFor="title">Job Title</label> {/* Changed to dropdown */}
+          <select
             name="title"
             id="title"
-            placeholder="Title"
             value={data.title}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Job Title</option>
+            {jobTitles.map((jobTitle, index) => (
+              <option key={index} value={jobTitle}>
+                {jobTitle}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="yoe">Years of Experience</label>
@@ -247,7 +260,6 @@ const ResumeForm = ({ onSave }) => {
                   value={exp.endDate}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
-
                 <label htmlFor={`projects-${index}`}>Projects</label>
                 <textarea
                   name="projects"
@@ -255,7 +267,7 @@ const ResumeForm = ({ onSave }) => {
                   placeholder="Projects"
                   value={exp.projects}
                   onChange={(e) => handleExperienceChange(index, e)}
-                ></textarea>
+                />
               </div>
             ))}
             <button type="button" onClick={addExperienceSection}>
@@ -265,23 +277,12 @@ const ResumeForm = ({ onSave }) => {
         )}
       </div>
 
-      {/* Education Section */}
-      <div className="form-section">
-        <h2>Education</h2>
-        <div className="form-group">
-          <label htmlFor="education">Education</label>
-          <textarea
-            name="education"
-            id="education"
-            placeholder="Education"
-            value={data.education}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-      </div>
-      <button type="submit">Save</button>
+      <button type="submit" className="submit-button">
+        Save and Preview
+      </button>
     </form>
   );
 };
 
 export default ResumeForm;
+
