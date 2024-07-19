@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ResumeForm.css";
-import dropdownOptions from "../dropdownOptions.json";
+import dropdownOptions from '../dropdownOptions.json';
 
 const ResumeForm = ({ onSave }) => {
   const [data, setData] = useState({
@@ -16,7 +17,8 @@ const ResumeForm = ({ onSave }) => {
     education: "",
     picture: "",
     currentEmployer: "",
-    yoe: "",
+    years: "",
+    months: "",
     experience: [
       {
         startDate: "",
@@ -91,11 +93,15 @@ const ResumeForm = ({ onSave }) => {
     setIsExperienceCollapsed(!isExperienceCollapsed);
   };
 
-  // Fetch job titles from JSON file (optional if not importing directly)
+  // Fetch job titles, years, and months from JSON file (optional if not importing directly)
   const [jobTitles, setJobTitles] = useState([]);
+  const [years, setYears] = useState([]);
+  const [months, setMonths] = useState([]);
 
   useEffect(() => {
     setJobTitles(dropdownOptions.jobTitles);
+    setYears(dropdownOptions.years);
+    setMonths(dropdownOptions.months);
   }, []);
 
   return (
@@ -151,15 +157,36 @@ const ResumeForm = ({ onSave }) => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="yoe">Years of Experience</label>
-          <input
-            type="number"
-            name="yoe"
-            id="yoe"
-            placeholder="Years of experience"
-            value={data.yoe}
+          <label htmlFor="years">Years of Experience</label>
+          <select
+            name="years"
+            id="years"
+            value={data.years}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Years</option>
+            {years.map((year, index) => (
+              <option key={index} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="months">Months of Experience</label>
+          <select
+            name="months"
+            id="months"
+            value={data.months}
+            onChange={handleChange}
+          >
+            <option value="">Select Months</option>
+            {months.map((month, index) => (
+              <option key={index} value={month}>
+                {month}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -201,6 +228,21 @@ const ResumeForm = ({ onSave }) => {
         </div>
       </div>
 
+      {/* Summary Section */}
+      <div className="form-section">
+        <h2>Summary</h2>
+        <div className="form-group">
+          <label htmlFor="summary">Professional Summary</label>
+          <textarea
+            name="summary"
+            id="summary"
+            placeholder="Write a brief summary"
+            value={data.summary}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
       {/* Skills Section */}
       <div className="form-section collapsible-section">
         <h2 onClick={toggleSkills} className="collapsible-header">
@@ -224,19 +266,6 @@ const ResumeForm = ({ onSave }) => {
             </button>
           </div>
         )}
-      </div>
-      {/* Summary section */}
-      <div className="form-section">
-      <div className="form-group">
-        <label htmlFor="summary">Summary</label>
-        <textarea
-          name="summary"
-          id="summary"
-          placeholder="Write a brief summary about yourself"
-          value={data.summary}
-          onChange={handleChange}
-        />
-      </div>
       </div>
 
       {/* Experience Section */}

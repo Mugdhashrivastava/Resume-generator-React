@@ -1,3 +1,4 @@
+
 import React, { forwardRef } from "react";
 import "./ResumePreview.css";
 
@@ -11,7 +12,7 @@ const ResumePreview = forwardRef(({ data }, ref) => {
         <div className="info-section">
           <p className="title">{data.title}</p>
           <p className="yoe">
-            <strong>{data.yoe} years of experience</strong>
+            <strong>{data.years} years {data.months} months of experience</strong>
           </p>
           <h2 className="section-header">CONTACT</h2>
           <p>
@@ -20,14 +21,11 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <p>
             <strong>Country:</strong> {data.country}
           </p>
-
           <p>
-            <strong>Email:</strong> 
-            {data.email}
+            <strong>Email:</strong> {data.email}
           </p>
           <h2 className="section-header">SUMMARY</h2>
           <p>{data.summary}</p>
-
           <h2 className="section-header">Skills</h2>
           <ul>
             {data.skills.map((skill, index) => (
