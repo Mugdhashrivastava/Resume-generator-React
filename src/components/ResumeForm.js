@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ResumeForm.css";
-import dropdownOptions from '../dropdownOptions.json'; // Import dropdown options from JSON file
+import dropdownOptions from "../dropdownOptions.json";
 
 const ResumeForm = ({ onSave }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
-    title: "", 
+    title: "",
     email: "",
     city: "",
     country: "",
@@ -135,7 +135,7 @@ const ResumeForm = ({ onSave }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="title">Job Title</label> {/* Changed to dropdown */}
+          <label htmlFor="title">Job Title</label>
           <select
             name="title"
             id="title"
@@ -225,6 +225,19 @@ const ResumeForm = ({ onSave }) => {
           </div>
         )}
       </div>
+      {/* Summary section */}
+      <div className="form-section">
+      <div className="form-group">
+        <label htmlFor="summary">Summary</label>
+        <textarea
+          name="summary"
+          id="summary"
+          placeholder="Write a brief summary about yourself"
+          value={data.summary}
+          onChange={handleChange}
+        />
+      </div>
+      </div>
 
       {/* Experience Section */}
       <div className="form-section collapsible-section">
@@ -285,4 +298,3 @@ const ResumeForm = ({ onSave }) => {
 };
 
 export default ResumeForm;
-
