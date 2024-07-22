@@ -26,17 +26,17 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           </p>
           <h2 className="section-header">SUMMARY</h2>
           <p>{data.summary}</p>
-        
-        </div>  <h2 className="section-header">Skills</h2>
+          <h2 className="section-header">Skills</h2>
           <ul>
             {data.skills.map((skill, index) => (
               <li key={index}>{skill}</li>
             ))}
           </ul>
+        </div>
       </div>
       <div className="right-column">
         <h1 className="name">
-          {data.firstName} {data.lastName}
+          {data.firstName} {data.middleName && `${data.middleName} `} {data.lastName}
         </h1>
         <p className="current-employer">{data.currentEmployer}</p>
         <p className="title">{data.title}</p>

@@ -6,6 +6,7 @@ import dropdownOptions from '../dropdownOptions.json';
 const ResumeForm = ({ onSave }) => {
   const [data, setData] = useState({
     firstName: "",
+    middleName: "", 
     lastName: "",
     title: "",
     email: "",
@@ -143,6 +144,17 @@ const ResumeForm = ({ onSave }) => {
             id="firstName"
             placeholder="First Name"
             value={data.firstName}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="middleName">Middle Name</label>
+          <input
+            type="text"
+            name="middleName"
+            id="middleName"
+            placeholder="Middle Name"
+            value={data.middleName}
             onChange={handleChange}
           />
         </div>
@@ -301,13 +313,13 @@ const ResumeForm = ({ onSave }) => {
         {!isExperienceCollapsed && (
           <div className="experience-section">
             {data.experience.map((exp, index) => (
-              <div key={index} className="form-group">
-                <label htmlFor={`companyName-${index}`}>Company Name</label>
+              <div key={index} className="experience-form-group">
+                <label htmlFor={`companyName-${index}`}>Company</label>
                 <input
                   type="text"
                   name="companyName"
                   id={`companyName-${index}`}
-                  placeholder="Company Name"
+                  placeholder="Company"
                   value={exp.companyName}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
