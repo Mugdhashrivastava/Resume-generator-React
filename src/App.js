@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import ResumeForm from './components/ResumeForm';
+import ResumeForm from './components/ResumeForm/ResumeForm';
 import ResumePreview from './components/ResumePreview';
 import './App.css';
 
