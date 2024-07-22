@@ -56,13 +56,18 @@ const ResumeForm = ({ onSave }) => {
   };
 
   const addExperienceSection = () => {
-    setData({
-      ...data,
-      experience: [
-        ...data.experience,
-        { startDate: "", endDate: "", companyName: "", projects: "" },
-      ],
-    });
+    // Ensure the first experience section is filled
+    if (data.experience[0].startDate && data.experience[0].endDate && data.experience[0].companyName && data.experience[0].projects) {
+      setData({
+        ...data,
+        experience: [
+          ...data.experience,
+          { startDate: "", endDate: "", companyName: "", projects: "" },
+        ],
+      });
+    } else {
+      alert("Please fill out the first experience section before adding another.");
+    }
   };
 
   const handleSkillChange = (index, e) => {
@@ -76,23 +81,31 @@ const ResumeForm = ({ onSave }) => {
   };
 
   const addSkill = () => {
-    setData({
-      ...data,
-      skills: [...data.skills, ""],
-    });
+    // Ensure the first skill is filled
+    if (data.skills[0]) {
+      setData({
+        ...data,
+        skills: [...data.skills, ""],
+      });
+    } else {
+      alert("Please fill out the first skill before adding another.");
+    }
   };
 
-  const removeSkill = (index) => {
-    setData({
-      ...data,
-      skills: data.skills.filter((_, i) => i !== index),
-    });
+  const removeLastSkill = () => {
+    // Ensure there are at least two skills before removing the last one
+    if (data.skills.length > 1) {
+      setData({
+        ...data,
+        skills: data.skills.slice(0, -1),
+      });
+    }
   };
 
-  const handleExperienceRemove = (index) => {
+  const removeLastExperience = () => {
     setData({
       ...data,
-      experience: data.experience.filter((_, i) => i !== index),
+      experience: data.experience.slice(0, -1),
     });
   };
 
@@ -285,7 +298,10 @@ const ResumeForm = ({ onSave }) => {
                   </option>
                 ))}
               </select>
-              <button type="button" onClick={() => removeSkill(index)}>Remove</button>
+              {/* Only show remove button if there are more than one skill */}
+              {index > 0 && (
+                <button type="button" onClick={removeLastSkill}>Remove</button>
+              )}
             </div>
           ))}
           <button type="button" onClick={addSkill}>Add Skill</button>
@@ -349,7 +365,7 @@ const ResumeForm = ({ onSave }) => {
                   onChange={(e) => handleExperienceChange(index, e)}
                 ></textarea>
               </div>
-              <button type="button" onClick={() => handleExperienceRemove(index)}>Remove</button>
+              {index > 0 && <button type="button" onClick={removeLastExperience}>Remove</button>}
             </div>
           ))}
           <button type="button" onClick={addExperienceSection}>Add Experience</button>
@@ -388,4 +404,3 @@ const ResumeForm = ({ onSave }) => {
 };
 
 export default ResumeForm;
-
