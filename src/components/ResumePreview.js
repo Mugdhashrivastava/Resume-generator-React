@@ -1,4 +1,3 @@
-
 import React, { forwardRef } from "react";
 import "./ResumePreview.css";
 
@@ -10,7 +9,9 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <img src={data.picture} alt="User" className="profile-picture" />
         )}
         <div className="info-section">
-          <p className="title">{data.title}</p>
+          <p className="title">
+            {data.titlePrefix} {data.title}
+          </p>
           <p className="yoe">
             <strong>{data.years} years {data.months} months of experience</strong>
           </p>
@@ -18,9 +19,9 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <p>
             <strong>City:</strong> {data.city}
           </p>
-          <p>
+          {/* <p>
             <strong>Country:</strong> {data.country}
-          </p>
+          </p> */}
           <p>
             <strong>Email:</strong> {data.email}
           </p>
@@ -36,7 +37,9 @@ const ResumePreview = forwardRef(({ data }, ref) => {
       </div>
       <div className="right-column">
         <h1 className="name">
-          {data.firstName} {data.middleName && `${data.middleName} `} {data.lastName}
+          {data.titlePrefix && `${data.titlePrefix} `}{data.firstName} 
+          {data.middleName && `${data.middleName} `} 
+          {data.lastName}
         </h1>
         <p className="current-employer">{data.currentEmployer}</p>
         <p className="title">{data.title}</p>

@@ -5,10 +5,10 @@ import dropdownOptions from '../dropdownOptions.json';
 
 const ResumeForm = ({ onSave }) => {
   const [data, setData] = useState({
+    titlePrefix: "", 
     firstName: "",
-    middleName: "", 
     lastName: "",
-    title: "",
+    middleName: "", 
     email: "",
     city: "",
     country: "",
@@ -17,7 +17,7 @@ const ResumeForm = ({ onSave }) => {
     education: "",
     picture: "",
     currentEmployer: "",
-    years: "", 
+    years: "",
     months: "",
     experience: [
       {
@@ -65,14 +65,6 @@ const ResumeForm = ({ onSave }) => {
     });
   };
 
-  const removeExperienceSection = (index) => {
-    const newExperience = data.experience.filter((_, i) => i !== index);
-    setData({
-      ...data,
-      experience: newExperience,
-    });
-  };
-
   const handleSkillChange = (index, e) => {
     const { value } = e.target;
     const newSkills = [...data.skills];
@@ -91,16 +83,22 @@ const ResumeForm = ({ onSave }) => {
   };
 
   const removeSkill = (index) => {
-    const newSkills = data.skills.filter((_, i) => i !== index);
     setData({
       ...data,
-      skills: newSkills,
+      skills: data.skills.filter((_, i) => i !== index),
+    });
+  };
+
+  const handleExperienceRemove = (index) => {
+    setData({
+      ...data,
+      experience: data.experience.filter((_, i) => i !== index),
     });
   };
 
   const [isSkillsCollapsed, setIsSkillsCollapsed] = useState(false);
   const [isExperienceCollapsed, setIsExperienceCollapsed] = useState(false);
-
+  
   const toggleSkills = () => {
     setIsSkillsCollapsed(!isSkillsCollapsed);
   };
@@ -109,17 +107,18 @@ const ResumeForm = ({ onSave }) => {
     setIsExperienceCollapsed(!isExperienceCollapsed);
   };
 
-  // Fetch job titles, years, months, and skills from JSON file
   const [jobTitles, setJobTitles] = useState([]);
   const [years, setYears] = useState([]);
   const [months, setMonths] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [titles, setTitles] = useState([]);
 
   useEffect(() => {
     setJobTitles(dropdownOptions.jobTitles);
     setYears(dropdownOptions.years);
     setMonths(dropdownOptions.months);
     setSkills(dropdownOptions.skills);
+    setTitles(dropdownOptions.titles);
   }, []);
 
   return (
@@ -135,6 +134,22 @@ const ResumeForm = ({ onSave }) => {
             id="picture"
             onChange={handleChange}
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="titlePrefix">Title</label>
+          <select
+            name="titlePrefix"
+            id="titlePrefix"
+            value={data.titlePrefix}
+            onChange={handleChange}
+          >
+            <option value="">Select Title</option>
+            {titles.map((title, index) => (
+              <option key={index} value={title}>
+                {title}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>
@@ -244,7 +259,7 @@ const ResumeForm = ({ onSave }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="country">Country</label>
           <input
             type="text"
@@ -254,18 +269,17 @@ const ResumeForm = ({ onSave }) => {
             value={data.country}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Summary Section */}
       <div className="form-section">
         <h2>Summary</h2>
         <div className="form-group">
-          <label htmlFor="summary">Professional Summary</label>
           <textarea
             name="summary"
             id="summary"
-            placeholder="Write a brief summary"
+            placeholder="Summary"
             value={data.summary}
             onChange={handleChange}
           />
@@ -273,89 +287,82 @@ const ResumeForm = ({ onSave }) => {
       </div>
 
       {/* Skills Section */}
-      <div className="form-section collapsible-section">
-        <h2 onClick={toggleSkills} className="collapsible-header">
-          Skills {isSkillsCollapsed ? "▲" : "▼"}
-        </h2>
+      <div className="form-section">
+        <h2 onClick={toggleSkills}>Skills {isSkillsCollapsed ? '🔽' : '🔼'}</h2>
         {!isSkillsCollapsed && (
-          <div className="skills-section">
+          <>
             {data.skills.map((skill, index) => (
               <div key={index} className="form-group">
+                <label htmlFor={`skill${index}`}>Skill {index + 1}</label>
                 <select
-                  name={`skill-${index}`}
+                  name={`skill${index}`}
+                  id={`skill${index}`}
                   value={skill}
                   onChange={(e) => handleSkillChange(index, e)}
                 >
                   <option value="">Select Skill</option>
-                  {skills.map((skillOption, index) => (
-                    <option key={index} value={skillOption}>
+                  {skills.map((skillOption, skillIndex) => (
+                    <option key={skillIndex} value={skillOption}>
                       {skillOption}
                     </option>
                   ))}
                 </select>
-                <button type="button" onClick={() => removeSkill(index)}>
-                  Remove
-                </button>
+                <button type="button" onClick={() => removeSkill(index)}>Remove</button>
               </div>
             ))}
-            <button type="button" onClick={addSkill}>
-              Add Skill
-            </button>
-          </div>
+            <button type="button" onClick={addSkill}>Add Skill</button>
+          </>
         )}
       </div>
 
       {/* Experience Section */}
-      <div className="form-section collapsible-section">
-        <h2 onClick={toggleExperience} className="collapsible-header">
-          Experience {isExperienceCollapsed ? "▲" : "▼"}
-        </h2>
+      <div className="form-section">
+        <h2 onClick={toggleExperience}>Experience {isExperienceCollapsed ? '🔽' : '🔼'}</h2>
         {!isExperienceCollapsed && (
-          <div className="experience-section">
+          <>
             {data.experience.map((exp, index) => (
-              <div key={index} className="experience-form-group">
-                <label htmlFor={`companyName-${index}`}>Company</label>
+              <div key={index} className="form-group experience">
+                <label htmlFor={`companyName${index}`}>Company Name</label>
                 <input
                   type="text"
                   name="companyName"
-                  id={`companyName-${index}`}
-                  placeholder="Company"
+                  id={`companyName${index}`}
+                  placeholder="Company Name"
                   value={exp.companyName}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
-                <label htmlFor={`startDate-${index}`}>Start Date</label>
+                <label htmlFor={`startDate${index}`}>Start Date</label>
                 <input
-                  type="date"
+                  type="text"
                   name="startDate"
-                  id={`startDate-${index}`}
+                  id={`startDate${index}`}
+                  placeholder="Start Date"
                   value={exp.startDate}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
-                <label htmlFor={`endDate-${index}`}>End Date</label>
+                <label htmlFor={`endDate${index}`}>End Date</label>
                 <input
-                  type="date"
+                  type="text"
                   name="endDate"
-                  id={`endDate-${index}`}
+                  id={`endDate${index}`}
+                  placeholder="End Date"
                   value={exp.endDate}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
-                <label htmlFor={`projects-${index}`}>Projects</label>
-                <textarea
+                <label htmlFor={`projects${index}`}>Projects</label>
+                <input
+                  type="text"
                   name="projects"
-                  id={`projects-${index}`}
+                  id={`projects${index}`}
                   placeholder="Projects"
                   value={exp.projects}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
-                <button type="button" onClick={() => removeExperienceSection(index)}>
-                  Remove
-                </button>
+                <button type="button" onClick={() => handleExperienceRemove(index)}>Remove Experience</button>
               </div>
             ))}
-            <button type="button" onClick={addExperienceSection}>
-              Add Experience
-            </button>
-          </div>
+            <button type="button" onClick={addExperienceSection}>Add Experience</button>
+          </>
         )}
       </div>
 
@@ -363,23 +370,21 @@ const ResumeForm = ({ onSave }) => {
       <div className="form-section">
         <h2>Education</h2>
         <div className="form-group">
-          <label htmlFor="education">Education</label>
           <textarea
             name="education"
             id="education"
-            placeholder="Education details"
+            placeholder="Education"
             value={data.education}
             onChange={handleChange}
           />
         </div>
       </div>
 
-      {/* Save Button */}
-      <div className="form-group">
-        <button type="submit">Save</button>
-      </div>
+      <button type="submit">Save and Preview</button>
     </form>
   );
 };
 
 export default ResumeForm;
+
+
