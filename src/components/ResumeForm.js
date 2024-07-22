@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ResumeForm.css";
@@ -93,15 +92,17 @@ const ResumeForm = ({ onSave }) => {
     setIsExperienceCollapsed(!isExperienceCollapsed);
   };
 
-  // Fetch job titles, years, and months from JSON file (optional if not importing directly)
+  // Fetch job titles, years, months, and skills from JSON file
   const [jobTitles, setJobTitles] = useState([]);
   const [years, setYears] = useState([]);
   const [months, setMonths] = useState([]);
+  const [skills, setSkills] = useState([]);
 
   useEffect(() => {
     setJobTitles(dropdownOptions.jobTitles);
     setYears(dropdownOptions.years);
     setMonths(dropdownOptions.months);
+    setSkills(dropdownOptions.skills);
   }, []);
 
   return (
@@ -252,13 +253,18 @@ const ResumeForm = ({ onSave }) => {
           <div className="skills-section">
             {data.skills.map((skill, index) => (
               <div key={index} className="form-group">
-                <input
-                  type="text"
+                <select
                   name={`skill-${index}`}
-                  placeholder="Skill"
                   value={skill}
                   onChange={(e) => handleSkillChange(index, e)}
-                />
+                >
+                  <option value="">Select Skill</option>
+                  {skills.map((skillOption, index) => (
+                    <option key={index} value={skillOption}>
+                      {skillOption}
+                    </option>
+                  ))}
+                </select>
               </div>
             ))}
             <button type="button" onClick={addSkill}>
@@ -319,13 +325,27 @@ const ResumeForm = ({ onSave }) => {
         )}
       </div>
 
-      <button type="submit" className="submit-button">
-        Save and Preview
-      </button>
+      {/* Education Section */}
+      <div className="form-section">
+        <h2>Education</h2>
+        <div className="form-group">
+          <label htmlFor="education">Education</label>
+          <textarea
+            name="education"
+            id="education"
+            placeholder="Education details"
+            value={data.education}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      {/* Save Button */}
+      <div className="form-group">
+        <button type="submit">Save</button>
+      </div>
     </form>
   );
 };
 
 export default ResumeForm;
-
-
