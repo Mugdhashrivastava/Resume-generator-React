@@ -64,6 +64,14 @@ const ResumeForm = ({ onSave }) => {
     });
   };
 
+  const removeExperienceSection = (index) => {
+    const newExperience = data.experience.filter((_, i) => i !== index);
+    setData({
+      ...data,
+      experience: newExperience,
+    });
+  };
+
   const handleSkillChange = (index, e) => {
     const { value } = e.target;
     const newSkills = [...data.skills];
@@ -78,6 +86,14 @@ const ResumeForm = ({ onSave }) => {
     setData({
       ...data,
       skills: [...data.skills, ""],
+    });
+  };
+
+  const removeSkill = (index) => {
+    const newSkills = data.skills.filter((_, i) => i !== index);
+    setData({
+      ...data,
+      skills: newSkills,
     });
   };
 
@@ -265,6 +281,9 @@ const ResumeForm = ({ onSave }) => {
                     </option>
                   ))}
                 </select>
+                <button type="button" onClick={() => removeSkill(index)}>
+                  Remove
+                </button>
               </div>
             ))}
             <button type="button" onClick={addSkill}>
@@ -316,6 +335,9 @@ const ResumeForm = ({ onSave }) => {
                   value={exp.projects}
                   onChange={(e) => handleExperienceChange(index, e)}
                 />
+                <button type="button" onClick={() => removeExperienceSection(index)}>
+                  Remove
+                </button>
               </div>
             ))}
             <button type="button" onClick={addExperienceSection}>
