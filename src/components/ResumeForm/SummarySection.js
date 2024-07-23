@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormGroup from './FormGroup';
 
 const SummarySection = ({ data, handleChange, toggleSection, isCollapsed }) => {
+  
+  const [summaryError, setSummaryError] = useState(false);
+
+
+  const handleSummaryChange = (e) => {
+    handleChange(e); 
+    const { value } = e.target;
+
+    
+    const isValid = value.trim() !== ""; 
+    setSummaryError(!isValid); 
+  };
+
   return (
     <div className="form-section">
       <h2 
@@ -16,14 +29,16 @@ const SummarySection = ({ data, handleChange, toggleSection, isCollapsed }) => {
         className={`collapsible-content ${isCollapsed ? 'collapsed' : 'expanded'}`}
       >
         <FormGroup>
-          <label htmlFor="summary">summary</label>
+          <label htmlFor="summary">Summary</label>
           <textarea
             name="summary"
             id="summary"
             placeholder="Describe your summary"
-            value={data.summary}
-            onChange={handleChange}
+            value={data.summary || ""}
+            onChange={handleSummaryChange} 
+            className={summaryError ? "input-error" : ""} 
           ></textarea>
+          {summaryError && <span className="error-message">Summary cannot be empty</span>} 
         </FormGroup>
       </div>
     </div>

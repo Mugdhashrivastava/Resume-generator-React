@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import dropdownOptions from '../../dropdownOptions.json'; 
 
 const SkillsSection = ({ data, handleSkillChange, addSkill, removeLastSkill }) => {
-  const [isCollapsed, setIsCollapsed] = useState(true); // State to manage collapse/expand
+  const [isCollapsed, setIsCollapsed] = useState(true); 
   const skills = dropdownOptions.skills;
 
   const handleAddSkill = () => {
@@ -49,7 +49,8 @@ const SkillsSection = ({ data, handleSkillChange, addSkill, removeLastSkill }) =
                 </option>
               ))}
             </select>
-            {!skill && <span className="error-message">This field is required</span>}
+            {!skill && <span className="error-message">This field is required</span>} 
+            <br /> 
             {data.skills.length > 1 && index === data.skills.length - 1 && (
               <button type="button" onClick={removeLastSkill}>Remove</button>
             )}

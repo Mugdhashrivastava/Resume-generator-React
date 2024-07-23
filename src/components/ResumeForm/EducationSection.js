@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormGroup from './FormGroup';
 
 const EducationSection = ({ data, handleChange, toggleSection, isCollapsed }) => {
+  const [educationError, setEducationError] = useState(false);
+
+  const handleEducationChange = (e) => {
+    handleChange(e);
+    const { value } = e.target;
+    const isValid = value.trim() !== "";
+    setEducationError(!isValid);
+  };
+
   return (
     <div className="form-section">
       <h2 
@@ -21,9 +30,11 @@ const EducationSection = ({ data, handleChange, toggleSection, isCollapsed }) =>
             name="education"
             id="education"
             placeholder="Describe your education"
-            value={data.education}
-            onChange={handleChange}
+            value={data.education || ""}
+            onChange={handleEducationChange}
+            className={educationError ? "input-error" : ""}
           ></textarea>
+          {educationError && <span className="error-message">Education cannot be empty</span>}
         </FormGroup>
       </div>
     </div>
