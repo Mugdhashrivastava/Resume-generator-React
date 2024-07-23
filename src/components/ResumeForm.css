@@ -82,3 +82,15 @@ button[type="submit"] {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
+
+/* error message */
+.input-error {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+}
