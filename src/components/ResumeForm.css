@@ -10,7 +10,7 @@
 
 .form-section {
   margin-bottom: 20px;
-  background-color:#ccc;
+  background-color: #ccc;
 }
 
 .form-section h2 {
@@ -83,8 +83,21 @@ button[type="submit"] {
   border-radius: 4px;
 }
 
+/* Flexbox for side-by-side fields */
+.experience-dates {
+  display: flex;
+  gap: 2rem;
+}
 
-/* error message */
+.experience-dates .form-group {
+  flex: 1;
+}
+
+.experience-dates .form-group:last-child {
+  margin-right: 0;
+}
+
+/* Error message styling */
 .input-error {
   border: 1px solid red;
 }
