@@ -34,7 +34,7 @@ const PersonalInfoSection = ({ data, handleChange, toggleSection, isCollapsed })
             onChange={handleFileChange}
             className={!pictureError ? "input-error" : ""}
           />
-          {!pictureError && <span className="error-message">image file is required</span>}
+          {/* {!pictureError && <span className="error-message">image file is required</span>} */}
         </FormGroup>
         <FormGroup>
           <label htmlFor="titlePrefix">Title</label>

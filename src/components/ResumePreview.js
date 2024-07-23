@@ -19,9 +19,6 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <p>
             <strong>City:</strong> {data.city}
           </p>
-          {/* <p>
-            <strong>Country:</strong> {data.country}
-          </p> */}
           <p>
             <strong>Email:</strong> {data.email}
           </p>

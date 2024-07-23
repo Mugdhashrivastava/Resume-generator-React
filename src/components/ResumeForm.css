@@ -11,6 +11,8 @@
 .form-section {
   margin-bottom: 20px;
   background-color: #ccc;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .form-section h2 {

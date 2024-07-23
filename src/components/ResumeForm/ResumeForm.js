@@ -5,6 +5,8 @@ import SkillsSection from './SkillsSection';
 import ExperienceSection from './ExperienceSection';
 import EducationSection from './EducationSection';
 import dropdownOptions from '../../dropdownOptions.json';
+import ContactSection from './ContactSection';
+
 import './../ResumeForm.css';
 
 const ResumeForm = ({ onSave }) => {
@@ -14,6 +16,7 @@ const ResumeForm = ({ onSave }) => {
     lastName: "",
     middleName: "", 
     email: "",
+    phone: "",
     city: "",
     country: "",
     summary: "",
@@ -43,6 +46,7 @@ const ResumeForm = ({ onSave }) => {
   const [isSkillsCollapsed, setIsSkillsCollapsed] = useState(false);
   const [isExperienceCollapsed, setIsExperienceCollapsed] = useState(false);
   const [isEducationCollapsed, setIsEducationCollapsed] = useState(false);
+  const [isContactCollapsed, setIsContactCollapsed] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,6 +55,14 @@ const ResumeForm = ({ onSave }) => {
     setData({
       ...data,
       [name]: files ? URL.createObjectURL(files[0]) : value,
+    });
+  };
+
+  const handleContactChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
     });
   };
 
@@ -125,6 +137,7 @@ const ResumeForm = ({ onSave }) => {
   const toggleSkills = () => setIsSkillsCollapsed(!isSkillsCollapsed);
   const toggleExperience = () => setIsExperienceCollapsed(!isExperienceCollapsed);
   const toggleEducation = () => setIsEducationCollapsed(!isEducationCollapsed);
+  const toggleContact = () => setIsContactCollapsed(!isContactCollapsed);
 
   useEffect(() => {
     setJobTitles(dropdownOptions.jobTitles);
@@ -162,6 +175,12 @@ const ResumeForm = ({ onSave }) => {
         removeLastExperience={removeLastExperience}
         toggleSection={toggleExperience}
         isCollapsed={isExperienceCollapsed}
+      />
+      <ContactSection 
+        data={data}
+        handleChange={handleContactChange}
+        toggleSection={toggleContact}
+        isCollapsed={isContactCollapsed}
       />
       <EducationSection 
         data={data}
