@@ -6,6 +6,7 @@ import ExperienceSection from './ExperienceSection';
 import EducationSection from './EducationSection';
 import dropdownOptions from '../../dropdownOptions.json';
 import ContactSection from './ContactSection';
+import SummarySection from "./SummarySection";
 
 import './../ResumeForm.css';
 
@@ -47,6 +48,7 @@ const ResumeForm = ({ onSave }) => {
   const [isExperienceCollapsed, setIsExperienceCollapsed] = useState(false);
   const [isEducationCollapsed, setIsEducationCollapsed] = useState(false);
   const [isContactCollapsed, setIsContactCollapsed] = useState(false);
+  const [isSummaryCollapsed, setIsSummaryCollapsed] = useState(false);
 
   const navigate = useNavigate();
 
@@ -138,6 +140,7 @@ const ResumeForm = ({ onSave }) => {
   const toggleExperience = () => setIsExperienceCollapsed(!isExperienceCollapsed);
   const toggleEducation = () => setIsEducationCollapsed(!isEducationCollapsed);
   const toggleContact = () => setIsContactCollapsed(!isContactCollapsed);
+  const toggleSummary = () => setIsSummaryCollapsed(!isSummaryCollapsed);
 
   useEffect(() => {
     setJobTitles(dropdownOptions.jobTitles);
@@ -187,6 +190,12 @@ const ResumeForm = ({ onSave }) => {
         handleChange={handleChange}
         toggleSection={toggleEducation}
         isCollapsed={isEducationCollapsed}
+      />
+        <SummarySection 
+        data={data}
+        handleChange={handleChange}
+        toggleSection={toggleSummary}
+        isCollapsed={isSummaryCollapsed}
       />
       <button type="submit">Save and Preview</button>
     </form>

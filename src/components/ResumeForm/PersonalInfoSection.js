@@ -8,7 +8,7 @@ const PersonalInfoSection = ({ data, handleChange, toggleSection, isCollapsed })
 
   const handleFileChange = (e) => {
     handleChange(e);
-    setPictureError(!e.target.files.length); // Set error state based on whether a file is selected
+    setPictureError(!e.target.files.length); 
   };
 
   return (
@@ -145,7 +145,7 @@ const PersonalInfoSection = ({ data, handleChange, toggleSection, isCollapsed })
         </FormGroup>
       </div>
     </div>
-  );
+  ); 
 };
 
 export default PersonalInfoSection;
