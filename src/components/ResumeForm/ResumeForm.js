@@ -37,6 +37,8 @@ const ResumeForm = ({ onSave }) => {
     ],
   });
 
+
+
   const [jobTitles, setJobTitles] = useState([]);
   const [years, setYears] = useState([]);
   const [months, setMonths] = useState([]);

@@ -26,7 +26,7 @@ const EducationSection = ({ data, handleChange, toggleSection, isCollapsed }) =>
       >
         <FormGroup>
           <label htmlFor="education">Education</label>
-          <textarea
+          <textarea required
             name="education"
             id="education"
             placeholder="Describe your education"

@@ -9,9 +9,7 @@ const ResumePreview = forwardRef(({ data }, ref) => {
           <img src={data.picture} alt="User" className="profile-picture" />
         )}
         <div className="info-section">
-          <p className="title">
-            {data.titlePrefix} {data.title}
-          </p>
+          
           <p className="yoe">
             <strong>{data.years} years {data.months} months of experience</strong>
           </p>

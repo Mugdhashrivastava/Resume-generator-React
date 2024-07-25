@@ -30,7 +30,7 @@ const SummarySection = ({ data, handleChange, toggleSection, isCollapsed }) => {
       >
         <FormGroup>
           <label htmlFor="summary">Summary</label>
-          <textarea
+          <textarea required
             name="summary"
             id="summary"
             placeholder="Describe your summary"
